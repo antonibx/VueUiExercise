@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
 import { onMounted, reactive } from 'vue';
-import JobItem from '../components/JobItem.vue'
 
 // Define types
 type Task = { taskId : string, taskName: string }
@@ -70,8 +69,8 @@ onMounted(() => generateSchedule());
           <tbody>
             <tr class="no-bb" v-for="(tasks, machine) in data.schedule" :key="machine">
               <td class="machine">{{ machine }}</td>
-              <td v-for="(taskId, index) in data.maxTurns" :key="index">
-                {{ tasks[index] || '' }}
+              <td v-for="(taskId, index) in data.maxTurns" :key="index" :class="{'task': tasks[index]}">
+                {{ tasks[index] || '' }} 
               </td>
             </tr>
           </tbody>
@@ -95,7 +94,13 @@ onMounted(() => generateSchedule());
   border-left: 2pt solid var(--vt-c-black);
 }
 
-.no-bb {
+.task {
+  background: white;
+  color: black;
+  border: 2pt solid var(--vt-c-black);
+}
+
+tr {
   border-bottom: 2pt solid var(--vt-c-black);
 }
 
@@ -116,15 +121,10 @@ h1 {
   color: hsla(160, 100%, 37%, 1)
 }
 
-.bb {
-  border-bottom: 1pt solid white;
-}
-
 #table-wrapper {
   position:relative;
 }
 #table-scroll {
-  width:70vw;
   overflow:auto;  
   margin-top:80px;
   padding-bottom:80px;
