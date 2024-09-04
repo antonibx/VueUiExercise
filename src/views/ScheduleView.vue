@@ -113,6 +113,7 @@ td, th {
 h1 {
   text-align: center;
   min-width: 100px;
+  color: hsla(160, 100%, 37%, 1)
 }
 
 .bb {

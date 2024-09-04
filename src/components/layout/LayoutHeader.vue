@@ -14,7 +14,7 @@ import { RouterLink } from 'vue-router'
       </div>
 
       <nav>
-        <RouterLink to="/">TABLE</RouterLink>
+        <RouterLink to="/">SCHEDULE</RouterLink>
         <RouterLink to="/jobs">JOBS</RouterLink>
       </nav>
     </div>
@@ -41,6 +41,7 @@ nav {
   font-size: 12px;
   text-align: center;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 nav a.router-link-exact-active {
@@ -113,5 +114,6 @@ h3 {
 
 .greetings {
   text-align: center;
+  width: 100%;
 }
 </style>

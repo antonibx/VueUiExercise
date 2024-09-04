@@ -34,4 +34,19 @@ const props = defineProps<{ jobs: Job[] }>();
     align-items: center;
   }
 }
+
+h1 {
+  text-align: center;
+  min-width: 100px;
+  color: hsla(160, 100%, 37%, 1);
+  margin-left: -.7rem;
+}
+
+.col-4
+{
+  min-height: 100%;
+  background-color: white;
+  margin: 1.11%;
+  width: 31.11%;
+}
 </style>
