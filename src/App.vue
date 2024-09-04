@@ -1,30 +1,24 @@
+<script setup lang="ts">
+import LayoutHeader from './components/layout/LayoutHeader.vue'
+import { RouterView } from 'vue-router'
+import { onMounted, ref } from 'vue';
+import test from './data/jobs.json'
+
+// Define types
+type Task = { taskId : string, taskName: string }
+type Job = { jobId : string, tasks: Task[]}
+
+const jobs = ref<Job[]>([]);
+
+onMounted(() =>
+{
+  // Get JSON with data ang generate Timetable
+  jobs.value = test;
+});
+
+</script>
+
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <LayoutHeader />
+  <RouterView :jobs="jobs" />
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
