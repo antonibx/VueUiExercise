@@ -6,10 +6,10 @@ import { RouterLink } from 'vue-router'
   <header>
     <div class="wrapper">
       <div class="greetings">
-        <h1 class="green">UI VUE JS Technical Challenge</h1>
+        <h1 class="green">UI VUE JavaScript Technical Challenge</h1>
         <h3>
           Printing schedule consuming a 
-          <a href="https://vitejs.dev/" target="_blank" rel="noopener">jobs.json</a> file from API.
+          <a href="https://github.com/antonibx/VueUiExercise/blob/master/src/data/jobs.json" target="_blank" rel="noopener">jobs.json</a> file from API.
         </h3>
       </div>
 
