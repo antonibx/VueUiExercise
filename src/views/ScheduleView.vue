@@ -13,14 +13,15 @@ const props = defineProps<{ jobs: Job[] }>();
 const data = reactive({
   startTime: 8,
   schedule: {} as Record<string, any>,
-  maxTurns: 0
+  maxTurns: 0,
+  hovered: ''
 });
 
 // Method to generate the actual schedule
 const generateSchedule = () =>
 {
   // Initialize variables
-  let schedule = {} as {[index: string]: string[]};
+  let schedule = {} as {[index: string]: Record<string,string>[]};
   let machineTurn = {} as {[index: string]: number};
   let jobTurn = {} as {[index: string]: number};
 
@@ -38,7 +39,7 @@ const generateSchedule = () =>
 
       // Set task turn (checking machine availibility and previous tasks status) and push to schedule
       let taskTurn = Math.max(machineTurn[task.taskName], jobTurn[job.jobId]);
-      schedule[task.taskName][taskTurn] = task.taskId;
+      schedule[task.taskName][taskTurn] = {task: task.taskId, job: job.jobId};
 
       // Update turns for job and machines
       machineTurn[task.taskName] = taskTurn + 1;
@@ -69,8 +70,13 @@ onMounted(() => generateSchedule());
           <tbody>
             <tr class="no-bb" v-for="(tasks, machine) in data.schedule" :key="machine">
               <td class="machine">{{ machine }}</td>
-              <td v-for="(taskId, index) in data.maxTurns" :key="index" :class="{'task': tasks[index]}">
-                {{ tasks[index] || '' }} 
+              <td
+                v-for="(taskId, index) in data.maxTurns" :key="index"
+                :class="{'task': tasks[index], 'hover': tasks[index]?.job == data.hovered }"
+                @mouseover="data.hovered = (tasks[index])?.job || ''"
+                @mouseout="data.hovered = ''"
+              >
+                {{ (tasks[index])?.task || '' }} 
               </td>
             </tr>
           </tbody>
@@ -98,6 +104,10 @@ onMounted(() => generateSchedule());
   background: white;
   color: black;
   border: 2pt solid var(--vt-c-black);
+}
+
+.hover {
+  background: hsla(160, 100%, 37%, 1)!important;
 }
 
 tr {
